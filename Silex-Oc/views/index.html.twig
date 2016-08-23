@@ -1,0 +1,25 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+<div class="alert alert-danger">
+    {{ flashMessage }}
+</div>
+{% endfor %}
+    {% if links %}
+        <div class="list-group">
+            {% for link in links %}
+            <a href="{{ link.url }}" class="list-group-item"> {{ link.title }} 
+                <span class="small">Submitted by {{ link.user.username }}</span>
+                </a>
+               
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-warning">
+            No links found.
+        </div>
+    {% endif %}
+{% endblock %}

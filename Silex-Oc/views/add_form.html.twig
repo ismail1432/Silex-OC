@@ -1,0 +1,54 @@
+{% extends 'layout.html.twig' %}
+{% set adminMenu = true %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+{% for flashMessage in app.session.flashbag.get('success') %}
+<div class="alert alert-success">
+    {{ flashMessage }}
+</div>
+{% endfor %}
+{#
+{% if ( is_granted('ROLE_USER')) %}
+<h4> Connecté en tant que {{ app.user.username }}</h4>
+    </br>
+    {% include "VTCAnnonceBundle:Advert:form.html.twig" %}
+
+{% endif %}
+#}
+<div class="well">
+{{ form_start(linkForm, { 'attr': {'class': 'form-horizontal'} }) }}
+    <div class="form-group">
+        {{ form_label(linkForm.title,  "Titre du lien ", { 'label_attr':  {
+            'class': 'col-sm-4 control-label'
+        }}) }}
+        <div class="col-sm-6">
+            {{ form_errors(linkForm.title) }}
+            {{ form_widget(linkForm.title, { 'attr':  {
+                'class': 'form-control',
+                'rows': '4'                
+            }}) }}
+        </div>
+    </div>
+     <div class="form-group">
+        {{ form_label(linkForm.url, null, { 'label_attr':  {
+            'class': 'col-sm-4 control-label'
+        }}) }}
+        <div class="col-sm-6">
+            {{ form_errors(linkForm.url) }}
+            {{ form_widget(linkForm.url, { 'attr':  {
+                'class': 'form-control',
+                'rows': '4'                
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-3">
+            <input type="submit" class="btn btn-primary" value="Save" />
+        </div>
+    </div>
+{{ form_end(linkForm) }}
+</div>
+{% endblock %}
